@@ -10,7 +10,7 @@ const signToken = (user) =>
     { expiresIn: "7d" }
   );
 
-const publicUser = (u) => ({
+export const publicUser = (u) => ({
   id: u._id,
   name: u.name,
   email: u.email,
