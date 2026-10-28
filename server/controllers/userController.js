@@ -1,4 +1,4 @@
-import { publicUser } from "./authController.js";
+import { publicUser } from "./authcontroller.js";
 
 export const updateProfile = async (req, res) => {
   try {
