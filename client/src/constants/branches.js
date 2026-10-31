@@ -1,0 +1,1 @@
+export const BRANCHES = ["AIML", "CSE", "IT", "ECE", "EEE", "MECH", "CIVIL"];

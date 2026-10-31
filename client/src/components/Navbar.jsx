@@ -17,6 +17,9 @@ export default function Navbar() {
       <Link to="/" className="text-lg font-bold">PlacementHub</Link>
       {user ? (
         <div className="flex items-center gap-4">
+          <Link to="/drives" className="text-sm hover:underline">
+            Drives
+          </Link>
           <span className="text-sm">
             {user.name} ({user.role})
           </span>
