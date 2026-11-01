@@ -11,6 +11,7 @@ import {
   GraduationCap,
   CheckCircle2,
   XCircle,
+  Pencil,
 } from "lucide-react";
 import { useGetDriveQuery } from "../features/drives/drivesApi";
 import { checkEligibility } from "../utils/eligibility";
@@ -90,7 +91,19 @@ export default function DriveDetailPage() {
                 </div>
               </div>
 
-              {closed && <Badge tone="gray">Closed</Badge>}
+              <div className="flex items-center gap-2">
+                {closed && <Badge tone="gray">Closed</Badge>}
+                
+                {user?.role === "admin" && (
+                  <Link
+                  to={`/admin/drives/${drive._id}/edit`}
+                  className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+                  >
+                    <Pencil className="h-4 w-4" />
+                    Edit Drive
+                    </Link>
+                  )}
+              </div>
             </div>
           </div>
 
@@ -262,7 +275,7 @@ export default function DriveDetailPage() {
                 )}
               </section>
             )}
-            {user.role === "student" && (
+            {user?.role === "student" && (
               <ApplicationActions drive={drive} />
               )}
 

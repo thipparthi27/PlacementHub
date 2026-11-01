@@ -67,34 +67,47 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="text-2xl font-bold">Your profile</h1>
-      <p className="mt-1 text-sm text-muted">
+    <div className="mx-auto max-w-2xl px-4 py-10">
+        <h1 className="text-center text-2xl font-bold tracking-tight sm:text-3xl">
+             Your Profile
+        </h1>
+        <p className="mt-2 text-center text-sm text-muted">
         Eligibility on every drive is calculated from this information.
       </p>
+      
+        <Card className="mt-8">
+            <div className="flex items-center justify-between">
+                <div>
+                    <h2 className="text-base font-semibold">Profile Completeness</h2>
+                    <p className="mt-1 text-xs text-muted">
+                        Complete your profile to check placement eligibility.
+                    </p>
+                </div>
+                <span className="text-xl font-bold text-brand-600">{percent}%</span>
+            </div>
+
+            <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-gray-100">
+                <div
+                    className="h-full rounded-full bg-brand-600 transition-all duration-500"
+                    style={{ width: `${percent}%` }}
+                />
+            </div>
+        </Card>
+
 
       <Card className="mt-6">
-        <div className="flex items-center justify-between text-sm">
-          <span className="font-medium">Profile completeness</span>
-          <span className="text-muted">{percent}%</span>
-        </div>
-        <div className="mt-2 h-2 overflow-hidden rounded-full bg-gray-100">
-          <div
-            className="h-full rounded-full bg-brand-600 transition-all"
-            style={{ width: `${percent}%` }}
-          />
-        </div>
-      </Card>
-
-      <Card className="mt-4">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="mb-1 block text-sm font-medium" htmlFor="name">Full name</label>
+            <label className="mb-2 block text-sm font-semibold text-gray-700" htmlFor="name">
+              Full Name
+            </label>
             <input id="name" required value={form.name} onChange={setField("name")} className={inputClass} />
           </div>
 
           <div>
-            <label className="mb-1 block text-sm font-medium" htmlFor="branch">Branch</label>
+            <label className="mb-2 block text-sm font-semibold text-gray-700" htmlFor="branch">
+              Branch
+            </label>
             <select id="branch" value={form.branch} onChange={setField("branch")} className={inputClass}>
               <option value="">Select your branch</option>
               {BRANCHES.map((b) => (
@@ -133,7 +146,7 @@ export default function ProfilePage() {
 
           <div>
             <label className="mb-1 block text-sm font-medium" htmlFor="skill">Skills</label>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row">
               <input
                 id="skill"
                 value={skillInput}
@@ -166,7 +179,11 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <Button type="submit" loading={isLoading} className="w-full">
+          <Button
+            type="submit"
+            loading={isLoading}
+            className="mt-2 w-full py-3 font-semibold"
+          >
             Save profile
           </Button>
         </form>

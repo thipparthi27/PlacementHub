@@ -1,4 +1,5 @@
 import Drive from "../models/Drive.js";
+import Application from "../models/Application.js";
 
 const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -92,7 +93,13 @@ export const updateDrive = async (req, res) => {
 export const deleteDrive = async (req, res) => {
   try {
     const drive = await Drive.findByIdAndDelete(req.params.id);
-    if (!drive) return res.status(404).json({ message: "Drive not found" });
+
+    if (!drive) {
+      return res.status(404).json({ message: "Drive not found" });
+    }
+
+    await Application.deleteMany({ drive: drive._id });
+
     res.json({ message: "Drive deleted" });
   } catch (error) {
     if (error.name === "CastError") {

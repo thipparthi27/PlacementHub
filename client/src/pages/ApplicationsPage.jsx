@@ -92,11 +92,16 @@ export default function ApplicationsPage() {
     filter === "all" ? applications : applications?.filter((a) => a.status === filter);
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8">
-      <h1 className="text-2xl font-bold">My applications</h1>
+  <div className="mx-auto max-w-5xl px-4 py-10">
+    <h1 className="text-center text-2xl font-bold tracking-tight sm:text-3xl">
+        My Applications
+    </h1>
+    <p className="mt-2 text-center text-sm text-muted">
+        Track and manage all your placement applications in one place.
+    </p>
 
       {isLoading && (
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
           {[1, 2, 3, 4].map((n) => (
             <Skeleton key={n} className="h-44" />
           ))}
@@ -107,7 +112,7 @@ export default function ApplicationsPage() {
 
       {applications && (
         <>
-          <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+          <div className="mt-6 flex flex-wrap justify-center gap-3 pb-2">
             {["all", ...STATUSES].map((s) => (
               <button
                 key={s}
@@ -132,7 +137,7 @@ export default function ApplicationsPage() {
               }
             />
           ) : (
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
               {visible.map((application) => (
                 <ApplicationCard key={application._id} application={application} />
               ))}

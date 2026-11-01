@@ -1,3 +1,4 @@
+
 const tones = {
   green: "bg-green-50 text-green-700 ring-green-600/20",
   red: "bg-red-50 text-red-700 ring-red-600/20",
@@ -13,7 +14,7 @@ export default function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset ${tones[tone] || tones.gray} ${className}`}
+      className={`inline-flex items-center whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold tracking-wide ring-1 ring-inset ${tones[tone] || tones.gray} ${className}`}
     >
       {children}
     </span>

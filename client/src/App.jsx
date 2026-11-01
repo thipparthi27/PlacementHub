@@ -1,4 +1,3 @@
-
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -10,6 +9,8 @@ import DriveDetailPage from "./pages/DriveDetailPage";
 import { Toaster } from "react-hot-toast";
 import ApplicationsPage from "./pages/ApplicationsPage";
 import ProfilePage from "./pages/ProfilePage";
+import AdminDrivesPage from "./pages/AdminDrivesPage";
+import AdminDriveFormPage from "./pages/AdminDriveFormPage";
 
 export default function App() {
   return (
@@ -41,7 +42,14 @@ export default function App() {
             element={<ProfilePage />}
           />
         </Route>
-
+        <Route element={<ProtectedRoute role="admin" />}>
+          <Route path="/admin/drives" element={<AdminDrivesPage />} />
+          <Route path="/admin/drives/new" element={<AdminDriveFormPage />} />
+          <Route 
+            path="/admin/drives/:id/edit"
+            element={<AdminDriveFormPage />}
+          />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
