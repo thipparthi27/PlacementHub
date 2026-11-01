@@ -27,21 +27,18 @@ export default function App() {
             path="/"
             element={<Navigate to="/drives" replace />}
           />
-
           <Route path="/drives" element={<DrivesPage />} />
           <Route path="/drives/:id" element={<DriveDetailPage />} />
-
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/applications" element={<ApplicationsPage />} />
         </Route>
+
         <Route element={<ProtectedRoute role="student" />}>
-        <Route
-        path="/applications"
-        element={<ApplicationsPage />}
-        />
-        <Route
-          path="/profile"
-          element={<ProfilePage />}
+          <Route
+            path="/applications"
+            element={<ApplicationsPage />}
+          />
+          <Route
+            path="/profile"
+            element={<ProfilePage />}
           />
         </Route>
 
