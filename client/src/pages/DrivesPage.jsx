@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useGetDrivesQuery } from "../features/drives/drivesApi";
 import DriveCard from "../features/drives/DriveCard";
 import useDebounce from "../hooks/useDebounce";
-import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
 import { BRANCHES } from "../constants/branches";
+import Skeleton from "../components/ui/Skeleton";
+import EmptyState from "../components/ui/EmptyState";
+import Card from "../components/ui/Card";
+import { SearchX } from "lucide-react";
 
 export default function DrivesPage() {
   const [search, setSearch] = useState("");
@@ -35,7 +38,7 @@ export default function DrivesPage() {
   };
 
   const inputClass =
-    "rounded border border-gray-300 bg-white px-3 py-2 text-sm";
+  "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100";
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
@@ -98,7 +101,18 @@ export default function DrivesPage() {
         </label>
       </div>
 
-      {isLoading && <Loader />}
+      {isLoading && (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
+                <Card key={index} className="p-5">
+                    <Skeleton className="mb-4 h-6 w-2/3" />
+                    <Skeleton className="mb-3 h-4 w-1/2" />
+                    <Skeleton className="mb-6 h-4 w-full" />
+                    <Skeleton className="h-10 w-32" />
+                    </Card>
+                ))}
+                </div>
+            )}
 
       {isError && (
         <ErrorMessage message="Could not load drives. Is the server running?" />
@@ -107,10 +121,14 @@ export default function DrivesPage() {
       {data && (
         <>
           {data.drives.length === 0 ? (
-            <p className="mt-10 text-center text-gray-500">
-              No drives match your filters.
-            </p>
-          ) : (
+            <Card className="mt-6">
+                <EmptyState
+                icon={SearchX}
+                title="No drives found"
+                text="No placement drives match your current filters. Try changing your search or filters."
+                />
+                </Card>
+                ) : (
             <div
               className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ${
                 isFetching ? "opacity-60" : ""
